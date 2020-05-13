@@ -199,7 +199,7 @@ namespace HumaneSociety
         // TODO: Misc Animal Things
         internal static int GetCategoryId(string categoryName)
         {
-            Category category = db.Categories.Where(c => c.CategoryName == categoryName);
+            Category category = db.Categories.Where(c => c.Name == categoryName);
             return category.CategoryId;
 
             
@@ -224,7 +224,13 @@ namespace HumaneSociety
         // TODO: Adoption CRUD Operations
         internal static void Adopt(Animal animal, Client client)
         {
-            throw new NotImplementedException();
+            Adoption adoption = new Adoption();
+            adoption.ClientId = client.ClientId;
+            adoption.AnimalId = animal.AnimalId;
+            adoption.ApprovalStatus = "pending";
+            adoption.AdoptionFee = 75;
+            adoption.PaymentCollected = false;
+
         }
 
         internal static IQueryable<Adoption> GetPendingAdoptions()
