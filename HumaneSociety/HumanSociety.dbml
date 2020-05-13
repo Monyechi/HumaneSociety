@@ -5,7 +5,6 @@
       <Column Name="USStateId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Abbreviation" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
-      <Association Name="USState_Address" Member="Addresses" ThisKey="USStateId" OtherKey="USStateId" Type="Address" />
     </Type>
   </Table>
   <Table Name="dbo.Shots" Member="Shots">
@@ -114,7 +113,6 @@
       <Column Name="USStateId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Zipcode" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Address_Client" Member="Clients" ThisKey="AddressId" OtherKey="AddressId" Type="Client" />
-      <Association Name="USState_Address" Member="USState" ThisKey="USStateId" OtherKey="USStateId" Type="USState" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

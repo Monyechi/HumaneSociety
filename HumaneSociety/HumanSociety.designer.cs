@@ -196,8 +196,6 @@ namespace HumaneSociety
 		
 		private string _Abbreviation;
 		
-		private EntitySet<Address> _Addresses;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -212,7 +210,6 @@ namespace HumaneSociety
 		
 		public USState()
 		{
-			this._Addresses = new EntitySet<Address>(new Action<Address>(this.attach_Addresses), new Action<Address>(this.detach_Addresses));
 			OnCreated();
 		}
 		
@@ -276,19 +273,6 @@ namespace HumaneSociety
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="USState_Address", Storage="_Addresses", ThisKey="USStateId", OtherKey="USStateId")]
-		public EntitySet<Address> Addresses
-		{
-			get
-			{
-				return this._Addresses;
-			}
-			set
-			{
-				this._Addresses.Assign(value);
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -307,18 +291,6 @@ namespace HumaneSociety
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_Addresses(Address entity)
-		{
-			this.SendPropertyChanging();
-			entity.USState = this;
-		}
-		
-		private void detach_Addresses(Address entity)
-		{
-			this.SendPropertyChanging();
-			entity.USState = null;
 		}
 	}
 	
@@ -2355,8 +2327,6 @@ namespace HumaneSociety
 		
 		private EntitySet<Client> _Clients;
 		
-		private EntityRef<USState> _USState;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -2376,7 +2346,6 @@ namespace HumaneSociety
 		public Address()
 		{
 			this._Clients = new EntitySet<Client>(new Action<Client>(this.attach_Clients), new Action<Client>(this.detach_Clients));
-			this._USState = default(EntityRef<USState>);
 			OnCreated();
 		}
 		
@@ -2451,10 +2420,6 @@ namespace HumaneSociety
 			{
 				if ((this._USStateId != value))
 				{
-					if (this._USState.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnUSStateIdChanging(value);
 					this.SendPropertyChanging();
 					this._USStateId = value;
@@ -2494,40 +2459,6 @@ namespace HumaneSociety
 			set
 			{
 				this._Clients.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="USState_Address", Storage="_USState", ThisKey="USStateId", OtherKey="USStateId", IsForeignKey=true)]
-		public USState USState
-		{
-			get
-			{
-				return this._USState.Entity;
-			}
-			set
-			{
-				USState previousValue = this._USState.Entity;
-				if (((previousValue != value) 
-							|| (this._USState.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._USState.Entity = null;
-						previousValue.Addresses.Remove(this);
-					}
-					this._USState.Entity = value;
-					if ((value != null))
-					{
-						value.Addresses.Add(this);
-						this._USStateId = value.USStateId;
-					}
-					else
-					{
-						this._USStateId = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("USState");
-				}
 			}
 		}
 		

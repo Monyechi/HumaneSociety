@@ -56,7 +56,7 @@ namespace HumaneSociety
                 newAddress.City = null;
                 newAddress.USStateId = stateId;
                 newAddress.Zipcode = zipCode;                
-
+                 
                 db.Addresses.InsertOnSubmit(newAddress);
                 db.SubmitChanges();
 
@@ -199,17 +199,26 @@ namespace HumaneSociety
         // TODO: Misc Animal Things
         internal static int GetCategoryId(string categoryName)
         {
-            throw new NotImplementedException();
+            Category category = db.Categories.Where(c => c.CategoryName == categoryName);
+            return category.CategoryId;
+
+            
         }
         
         internal static Room GetRoom(int animalId)
         {
-            throw new NotImplementedException();
+            Room room = db.Rooms.Where(r => r.AnimalID == animalId);
+            return room;
+
+            
         }
         
         internal static int GetDietPlanId(string dietPlanName)
         {
-            throw new NotImplementedException();
+            DietPlan dietPlan = db.DietPlans.Where(d => d.dietPlanName);
+            return dietPlan.DietPlanId;
+
+            
         }
 
         // TODO: Adoption CRUD Operations

@@ -124,18 +124,11 @@
         <elementListCompartment Id="0412f089-ddaa-41e7-861f-e5144102f464" absoluteBounds="9.64, 7.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(10.625 : 8.64589680989583); (10.625 : 9.2756987421875); (5.5 : 9.2756987421875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(10.625 : 8.64589680989583); (10.625 : 9.2756987421875); (5.5 : 9.2756987421875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/HumanSocietyDataContext/Address/Address_Client" />
       <nodes>
         <classShapeMoniker Id="efd5df2d-ffbc-410a-bd4e-cf4bccdcbf7c" />
         <classShapeMoniker Id="5d60e885-6b34-450e-8630-4ef3bbbaac65" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(10.25 : 5.1362939453125); (10.25 : 6.875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/HumanSocietyDataContext/USState/USState_Address" />
-      <nodes>
-        <classShapeMoniker Id="836fa1e8-8240-4e38-942e-64f99f44c003" />
-        <classShapeMoniker Id="efd5df2d-ffbc-410a-bd4e-cf4bccdcbf7c" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>
