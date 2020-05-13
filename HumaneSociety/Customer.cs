@@ -393,7 +393,11 @@ namespace HumaneSociety
                 UserInterface.DisplayUserOptions("Please enter your new last name.");
                 client.LastName = UserInterface.GetUserInput();
                 Query.UpdateClient(client);
+
+               
             }
+            
+            
         }
     }
 }
