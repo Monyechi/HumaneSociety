@@ -199,24 +199,24 @@ namespace HumaneSociety
         // TODO: Misc Animal Things
         internal static int GetCategoryId(string categoryName)
         {
-            return db.Categories.Where(c => c.Name == categoryName);
-            
+            Category category = db.Categories.Where(c => c.Name == categoryName);
+            return category.CategoryId;
 
             
         }
         
         internal static Room GetRoom(int animalId)
         {
-            return db.Rooms.Where(r => r.AnimalID == animalId);
-            
+            Room room = db.Rooms.Where(r => r.animal == animalId);
+            return room;
 
             
         }
         
         internal static int GetDietPlanId(string dietPlanName)
         {
-            return db.DietPlans.Where(d => d.dietPlanName);
-            
+            DietPlan dietPlan = db.DietPlans.Where(d => d.PlanName);
+            return dietPlan.DietPlanId;
 
             
         }
