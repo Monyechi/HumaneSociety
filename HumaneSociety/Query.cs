@@ -200,7 +200,7 @@ namespace HumaneSociety
         // TODO: Misc Animal Things
         internal static int GetCategoryId(string categoryName)
         {
-            Category category = db.Categories.Where(c => c.Name == categoryName);
+            Category category = db.Categories.Where(c => c.Name == categoryName).Single();
             return category.CategoryId;
 
             
@@ -208,7 +208,7 @@ namespace HumaneSociety
         
         internal static Room GetRoom(int animalId)
         {
-            Room room = db.Rooms.Where(r => r.animal == animalId);
+            Room room = db.Rooms.Where(r => r.AnimalId == animalId).Single();
             return room;
 
             
@@ -216,7 +216,7 @@ namespace HumaneSociety
         
         internal static int GetDietPlanId(string dietPlanName)
         {
-            DietPlan dietPlan = db.DietPlans.Where(d => d.PlanName);
+            DietPlan dietPlan = db.DietPlans.Where(d => d.Name == dietPlanName).Single();
             return dietPlan.DietPlanId;
 
             
@@ -263,12 +263,12 @@ namespace HumaneSociety
         // TODO: Shots Stuff
         internal static IQueryable<AnimalShot> GetShots(Animal animal)
         {
-           
+            return db.AnimalShots.Where(a => a.AnimalId == animal.AnimalId);
         }
 
         internal static void UpdateShot(string shotName, Animal animal)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
