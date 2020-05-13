@@ -111,7 +111,7 @@
         <classShapeMoniker Id="e439b56e-fc00-4148-a067-7ad4285df1dd" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 8.19794840494792); (6.25 : 8.19794840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 8.19794840494792); (6.25 : 8.19794840494792)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/HumanSocietyDataContext/Client/Client_Adoption" />
       <nodes>
         <classShapeMoniker Id="5d60e885-6b34-450e-8630-4ef3bbbaac65" />
