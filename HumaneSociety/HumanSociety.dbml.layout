@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 10.125" name="HumanSociety">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11.875, 10.125" name="HumanSociety">
   <DataContextMoniker Name="/HumanSocietyDataContext" />
   <nestedChildShapes>
-    <classShape Id="836fa1e8-8240-4e38-942e-64f99f44c003" absoluteBounds="8.75, 1.375, 2, 1.3862939453125003">
+    <classShape Id="836fa1e8-8240-4e38-942e-64f99f44c003" absoluteBounds="8.875, 3.75, 2, 1.3862939453125">
       <DataClassMoniker Name="/HumanSocietyDataContext/USState" />
       <nestedChildShapes>
-        <elementListCompartment Id="b28420f1-68a5-4862-a1c6-4847992647e5" absoluteBounds="8.765, 1.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="b28420f1-68a5-4862-a1c6-4847992647e5" absoluteBounds="8.89, 4.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="3ec05153-68f7-4102-a27e-2d7dfd26cf15" absoluteBounds="3.5, 0.75, 2, 1.1939925130208335">
@@ -116,6 +116,26 @@
       <nodes>
         <classShapeMoniker Id="5d60e885-6b34-450e-8630-4ef3bbbaac65" />
         <classShapeMoniker Id="e439b56e-fc00-4148-a067-7ad4285df1dd" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="efd5df2d-ffbc-410a-bd4e-cf4bccdcbf7c" absoluteBounds="9.625, 6.875, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/HumanSocietyDataContext/Address" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0412f089-ddaa-41e7-861f-e5144102f464" absoluteBounds="9.64, 7.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(10.625 : 8.64589680989583); (10.625 : 9.2756987421875); (5.5 : 9.2756987421875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/HumanSocietyDataContext/Address/Address_Client" />
+      <nodes>
+        <classShapeMoniker Id="efd5df2d-ffbc-410a-bd4e-cf4bccdcbf7c" />
+        <classShapeMoniker Id="5d60e885-6b34-450e-8630-4ef3bbbaac65" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(10.25 : 5.1362939453125); (10.25 : 6.875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/HumanSocietyDataContext/USState/USState_Address" />
+      <nodes>
+        <classShapeMoniker Id="836fa1e8-8240-4e38-942e-64f99f44c003" />
+        <classShapeMoniker Id="efd5df2d-ffbc-410a-bd4e-cf4bccdcbf7c" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>
