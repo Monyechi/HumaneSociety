@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -172,7 +173,7 @@ namespace HumaneSociety
         // TODO: Animal CRUD Operations
         internal static void AddAnimal(Animal animal)
         {
-            
+           
         }
 
         internal static Animal GetAnimalByID(int id)
@@ -230,8 +231,10 @@ namespace HumaneSociety
             adoption.ApprovalStatus = "pending";
             adoption.AdoptionFee = 75;
             adoption.PaymentCollected = false;
-            db.Adoptions.Insert(adoption);
-            
+            db.Adoptions.InsertOnSubmit(adoption);
+            db.SubmitChanges();
+
+
         }
 
         internal static IQueryable<Adoption> GetPendingAdoptions()
@@ -246,17 +249,21 @@ namespace HumaneSociety
                 adoption.ApprovalStatus = "Accepted";
                 adoption.PaymentCollected = true;
             }
+            db.SubmitChanges();
         }
 
         internal static void RemoveAdoption(int animalId, int clientId)
         {
-            throw new NotImplementedException();
+            Adoption adoption = db.Adoptions.Where(a => a.AnimalId == animalId && a.ClientId == clientId).FirstOrDefault();
+            db.Adoptions.DeleteOnSubmit(adoption);
+            db.SubmitChanges();
+                
         }
 
         // TODO: Shots Stuff
         internal static IQueryable<AnimalShot> GetShots(Animal animal)
         {
-            throw new NotImplementedException();
+           
         }
 
         internal static void UpdateShot(string shotName, Animal animal)
