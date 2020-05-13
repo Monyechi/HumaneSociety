@@ -199,24 +199,24 @@ namespace HumaneSociety
         // TODO: Misc Animal Things
         internal static int GetCategoryId(string categoryName)
         {
-            Category category = db.Categories.Where(c => c.Name == categoryName);
-            return category.CategoryId;
+            return db.Categories.Where(c => c.Name == categoryName);
+            
 
             
         }
         
         internal static Room GetRoom(int animalId)
         {
-            Room room = db.Rooms.Where(r => r.AnimalID == animalId);
-            return room;
+            return db.Rooms.Where(r => r.AnimalID == animalId);
+            
 
             
         }
         
         internal static int GetDietPlanId(string dietPlanName)
         {
-            DietPlan dietPlan = db.DietPlans.Where(d => d.dietPlanName);
-            return dietPlan.DietPlanId;
+            return db.DietPlans.Where(d => d.dietPlanName);
+            
 
             
         }
@@ -230,17 +230,22 @@ namespace HumaneSociety
             adoption.ApprovalStatus = "pending";
             adoption.AdoptionFee = 75;
             adoption.PaymentCollected = false;
-
+            db.Adoptions.Insert(adoption);
+            
         }
 
         internal static IQueryable<Adoption> GetPendingAdoptions()
         {
-            throw new NotImplementedException();
+            return db.Adoptions.Where(a => a.ApprovalStatus == "pending");
         }
 
         internal static void UpdateAdoption(bool isAdopted, Adoption adoption)
         {
-            throw new NotImplementedException();
+            if(isAdopted == true)
+            {
+                adoption.ApprovalStatus = "Accepted";
+                adoption.PaymentCollected = true;
+            }
         }
 
         internal static void RemoveAdoption(int animalId, int clientId)
