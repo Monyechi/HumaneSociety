@@ -167,22 +167,34 @@ namespace HumaneSociety
         internal static void RunEmployeeQueries(Employee employee, string crudOperation)
         {
             
+            db.SubmitChanges();
+
         }
 
         // TODO: Animal CRUD Operations
         internal static void AddAnimal(Animal animal)
         {
-            
+            db.Animals.InsertOnSubmit(animal);
+            db.SubmitChanges();
+            //animalFromDb = newAnimal;
         }
 
         internal static Animal GetAnimalByID(int id)
         {
-            return 
+
+        }
+
+        internal static List<Animal> GetAnimalByID()
+        {
+            List<Animal> animalId = db.Animals.ToList();
+            
+            return animalId;
         }
 
         internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
-        {            
-            throw new NotImplementedException();
+        {
+            
+            db.SubmitChanges();
         }
 
         internal static void RemoveAnimal(Animal animal)
@@ -199,7 +211,7 @@ namespace HumaneSociety
         // TODO: Misc Animal Things
         internal static int GetCategoryId(string categoryName)
         {
-            Category category = db.Categories.Where(c => c.CategoryName == categoryName);
+            Category category = db.Categories.Where(c => c.CategoryName == categoryName).FirstOrDefault();
             return category.CategoryId;
 
             

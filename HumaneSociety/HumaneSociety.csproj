@@ -46,10 +46,10 @@
   <ItemGroup>
     <Compile Include="Admin.cs" />
     <Compile Include="Customer.cs" />
-    <Compile Include="HumanSociety.designer.cs">
+    <Compile Include="HumaneSociety.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>HumanSociety.dbml</DependentUpon>
+      <DependentUpon>HumaneSociety.dbml</DependentUpon>
     </Compile>
     <Compile Include="PointOfEntry.cs" />
     <Compile Include="Program.cs" />
@@ -67,13 +67,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="HumanSociety.dbml">
+    <None Include="HumaneSociety.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>HumanSociety.designer.cs</LastGenOutput>
+      <LastGenOutput>HumaneSociety.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
-    </None>
-    <None Include="HumanSociety.dbml.layout">
-      <DependentUpon>HumanSociety.dbml</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -82,6 +79,11 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="HumaneSociety.dbml.layout">
+      <DependentUpon>HumaneSociety.dbml</DependentUpon>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
