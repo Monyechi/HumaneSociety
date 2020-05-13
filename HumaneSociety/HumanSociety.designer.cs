@@ -60,7 +60,16 @@ namespace HumaneSociety
     partial void InsertAdoption(Adoption instance);
     partial void UpdateAdoption(Adoption instance);
     partial void DeleteAdoption(Adoption instance);
+    partial void InsertAddress(Address instance);
+    partial void UpdateAddress(Address instance);
+    partial void DeleteAddress(Address instance);
     #endregion
+		
+		public HumanSocietyDataContext() : 
+				base(global::HumaneSociety.Properties.Settings.Default.HumaneSocietyConnectionString, mappingSource)
+		{
+			OnCreated();
+		}
 		
 		public HumanSocietyDataContext(string connection) : 
 				base(connection, mappingSource)
@@ -163,6 +172,14 @@ namespace HumaneSociety
 			get
 			{
 				return this.GetTable<Adoption>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Address> Addresses
+		{
+			get
+			{
+				return this.GetTable<Address>();
 			}
 		}
 	}
@@ -960,6 +977,8 @@ namespace HumaneSociety
 		
 		private EntitySet<Adoption> _Adoptions;
 		
+		private EntityRef<Address> _Address;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -983,6 +1002,7 @@ namespace HumaneSociety
 		public Client()
 		{
 			this._Adoptions = new EntitySet<Adoption>(new Action<Adoption>(this.attach_Adoptions), new Action<Adoption>(this.detach_Adoptions));
+			this._Address = default(EntityRef<Address>);
 			OnCreated();
 		}
 		
@@ -1097,6 +1117,10 @@ namespace HumaneSociety
 			{
 				if ((this._AddressId != value))
 				{
+					if (this._Address.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnAddressIdChanging(value);
 					this.SendPropertyChanging();
 					this._AddressId = value;
@@ -1136,6 +1160,40 @@ namespace HumaneSociety
 			set
 			{
 				this._Adoptions.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Address_Client", Storage="_Address", ThisKey="AddressId", OtherKey="AddressId", IsForeignKey=true)]
+		public Address Address
+		{
+			get
+			{
+				return this._Address.Entity;
+			}
+			set
+			{
+				Address previousValue = this._Address.Entity;
+				if (((previousValue != value) 
+							|| (this._Address.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Address.Entity = null;
+						previousValue.Clients.Remove(this);
+					}
+					this._Address.Entity = value;
+					if ((value != null))
+					{
+						value.Clients.Add(this);
+						this._AddressId = value.AddressId;
+					}
+					else
+					{
+						this._AddressId = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Address");
+				}
 			}
 		}
 		
@@ -2248,6 +2306,192 @@ namespace HumaneSociety
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Addresses")]
+	public partial class Address : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _AddressId;
+		
+		private string _AddressLine1;
+		
+		private string _City;
+		
+		private System.Nullable<int> _USStateId;
+		
+		private System.Nullable<int> _Zipcode;
+		
+		private EntitySet<Client> _Clients;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnAddressIdChanging(int value);
+    partial void OnAddressIdChanged();
+    partial void OnAddressLine1Changing(string value);
+    partial void OnAddressLine1Changed();
+    partial void OnCityChanging(string value);
+    partial void OnCityChanged();
+    partial void OnUSStateIdChanging(System.Nullable<int> value);
+    partial void OnUSStateIdChanged();
+    partial void OnZipcodeChanging(System.Nullable<int> value);
+    partial void OnZipcodeChanged();
+    #endregion
+		
+		public Address()
+		{
+			this._Clients = new EntitySet<Client>(new Action<Client>(this.attach_Clients), new Action<Client>(this.detach_Clients));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddressId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int AddressId
+		{
+			get
+			{
+				return this._AddressId;
+			}
+			set
+			{
+				if ((this._AddressId != value))
+				{
+					this.OnAddressIdChanging(value);
+					this.SendPropertyChanging();
+					this._AddressId = value;
+					this.SendPropertyChanged("AddressId");
+					this.OnAddressIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddressLine1", DbType="VarChar(50)")]
+		public string AddressLine1
+		{
+			get
+			{
+				return this._AddressLine1;
+			}
+			set
+			{
+				if ((this._AddressLine1 != value))
+				{
+					this.OnAddressLine1Changing(value);
+					this.SendPropertyChanging();
+					this._AddressLine1 = value;
+					this.SendPropertyChanged("AddressLine1");
+					this.OnAddressLine1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_City", DbType="VarChar(50)")]
+		public string City
+		{
+			get
+			{
+				return this._City;
+			}
+			set
+			{
+				if ((this._City != value))
+				{
+					this.OnCityChanging(value);
+					this.SendPropertyChanging();
+					this._City = value;
+					this.SendPropertyChanged("City");
+					this.OnCityChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_USStateId", DbType="Int")]
+		public System.Nullable<int> USStateId
+		{
+			get
+			{
+				return this._USStateId;
+			}
+			set
+			{
+				if ((this._USStateId != value))
+				{
+					this.OnUSStateIdChanging(value);
+					this.SendPropertyChanging();
+					this._USStateId = value;
+					this.SendPropertyChanged("USStateId");
+					this.OnUSStateIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Zipcode", DbType="Int")]
+		public System.Nullable<int> Zipcode
+		{
+			get
+			{
+				return this._Zipcode;
+			}
+			set
+			{
+				if ((this._Zipcode != value))
+				{
+					this.OnZipcodeChanging(value);
+					this.SendPropertyChanging();
+					this._Zipcode = value;
+					this.SendPropertyChanged("Zipcode");
+					this.OnZipcodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Address_Client", Storage="_Clients", ThisKey="AddressId", OtherKey="AddressId")]
+		public EntitySet<Client> Clients
+		{
+			get
+			{
+				return this._Clients;
+			}
+			set
+			{
+				this._Clients.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Clients(Client entity)
+		{
+			this.SendPropertyChanging();
+			entity.Address = this;
+		}
+		
+		private void detach_Clients(Client entity)
+		{
+			this.SendPropertyChanging();
+			entity.Address = null;
 		}
 	}
 }
