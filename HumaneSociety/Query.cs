@@ -167,7 +167,7 @@ namespace HumaneSociety
         // TODO: Allow any of the CRUD operations to occur here
         internal static void RunEmployeeQueries(Employee employee, string crudOperation)
         {
-            
+            employee = db.Employees.Where(e => e.EmployeeId).
             db.SubmitChanges();
 
         }
@@ -175,54 +175,43 @@ namespace HumaneSociety
         // TODO: Animal CRUD Operations
         internal static void AddAnimal(Animal animal)
         {
-<<<<<<< HEAD
             db.Animals.InsertOnSubmit(animal);
             db.SubmitChanges();
             //animalFromDb = newAnimal;
-=======
-           
->>>>>>> b2c96728001abf9e465901a8ebe8f7ddc13ee8ea
         }
 
         internal static Animal GetAnimalByID(int id)
         {
-
-        }
-
-        internal static List<Animal> GetAnimalByID()
-        {
-            List<Animal> animalId = db.Animals.ToList();
-            
-            return animalId;
+            Animal animal = db.Animals.Where(a => a.AnimalId == id).FirstOrDefault();
+            return animal;
         }
 
         internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
         {
-            
+            animalId = db.Animals.Where(a => a.AnimalId == animalId).();
+            db.Animals.DeleteOnSubmit(updates);
             db.SubmitChanges();
         }
 
         internal static void RemoveAnimal(Animal animal)
         {
-            throw new NotImplementedException();
+            Animal removedAnimal = db.Animals.Where(a => a.AnimalId == animal).FirstorDefault();
+            db.Animals.DeleteOnSubmit(removedAnimal);
+            db.SubmitChanges();
         }
         
         // TODO: Animal Multi-Trait Search
         internal static IQueryable<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates) // parameter(s)?
         {
-            throw new NotImplementedException();
+            return db.Animals.Where(a => a.Demeanor);
         }
          
         // TODO: Misc Animal Things
         internal static int GetCategoryId(string categoryName)
         {
-<<<<<<< HEAD
             Category category = db.Categories.Where(c => c.CategoryName == categoryName).FirstOrDefault();
-=======
             Category category = db.Categories.Where(c => c.Name == categoryName).Single();
->>>>>>> b2c96728001abf9e465901a8ebe8f7ddc13ee8ea
             return category.CategoryId;
-
             
         }
         
