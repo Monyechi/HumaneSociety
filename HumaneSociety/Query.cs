@@ -167,42 +167,51 @@ namespace HumaneSociety
         // TODO: Allow any of the CRUD operations to occur here
         internal static void RunEmployeeQueries(Employee employee, string crudOperation)
         {
-            
+            employee = db.Employees.Where(e => e.EmployeeId).
+            db.SubmitChanges();
+
         }
 
         // TODO: Animal CRUD Operations
         internal static void AddAnimal(Animal animal)
         {
-           
+            db.Animals.InsertOnSubmit(animal);
+            db.SubmitChanges();
+            //animalFromDb = newAnimal;
         }
 
         internal static Animal GetAnimalByID(int id)
         {
-            
+            Animal animal = db.Animals.Where(a => a.AnimalId == id).FirstOrDefault();
+            return animal;
         }
 
         internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
-        {            
-            throw new NotImplementedException();
+        {
+            animalId = db.Animals.Where(a => a.AnimalId == animalId).();
+            db.Animals.DeleteOnSubmit(updates);
+            db.SubmitChanges();
         }
 
         internal static void RemoveAnimal(Animal animal)
         {
-            throw new NotImplementedException();
+            Animal removedAnimal = db.Animals.Where(a => a.AnimalId == animal).FirstorDefault();
+            db.Animals.DeleteOnSubmit(removedAnimal);
+            db.SubmitChanges();
         }
         
         // TODO: Animal Multi-Trait Search
         internal static IQueryable<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates) // parameter(s)?
         {
-            throw new NotImplementedException();
+            return db.Animals.Where(a => a.Demeanor);
         }
          
         // TODO: Misc Animal Things
         internal static int GetCategoryId(string categoryName)
         {
+            Category category = db.Categories.Where(c => c.CategoryName == categoryName).FirstOrDefault();
             Category category = db.Categories.Where(c => c.Name == categoryName).Single();
             return category.CategoryId;
-
             
         }
         
@@ -218,7 +227,7 @@ namespace HumaneSociety
         {
             DietPlan dietPlan = db.DietPlans.Where(d => d.Name == dietPlanName).Single();
             return dietPlan.DietPlanId;
-            
+
             
         }
 
@@ -268,10 +277,7 @@ namespace HumaneSociety
 
         internal static void UpdateShot(string shotName, Animal animal)
         {
-            Shot shotUpdate = db.Shots.Where(s => s.Name == shotName).FirstOrDefault();
-            AnimalShot animalShot = db.AnimalShots.Where(a => a.AnimalId == animal.AnimalId && a.ShotId == shotUpdate.ShotId).FirstOrDefault();
-            animalShot.DateReceived = DateTime.Now;
-
+            
         }
     }
 }
