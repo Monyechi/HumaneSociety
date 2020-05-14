@@ -182,8 +182,7 @@ namespace HumaneSociety
 
         internal static Animal GetAnimalByID(int id)
         {
-            Animal animal = db.Animals.Where(a => a.AnimalId == id).FirstOrDefault();
-            return animal;
+            return 
         }
 
         internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
@@ -227,7 +226,7 @@ namespace HumaneSociety
         {
             DietPlan dietPlan = db.DietPlans.Where(d => d.Name == dietPlanName).Single();
             return dietPlan.DietPlanId;
-
+            
             
         }
 
@@ -277,7 +276,10 @@ namespace HumaneSociety
 
         internal static void UpdateShot(string shotName, Animal animal)
         {
-            
+            Shot shotUpdate = db.Shots.Where(s => s.Name == shotName).FirstOrDefault();
+            AnimalShot animalShot = db.AnimalShots.Where(a => a.AnimalId == animal.AnimalId && a.ShotId == shotUpdate.ShotId).FirstOrDefault();
+            animalShot.DateReceived = DateTime.Now;
+
         }
     }
 }
